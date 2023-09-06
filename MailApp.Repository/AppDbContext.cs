@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NLayerApp.Repository
+namespace MailApp.Repository
 {
     public class AppDbContext : DbContext
     {

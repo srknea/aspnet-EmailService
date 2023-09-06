@@ -1,5 +1,11 @@
+using MailApp.Core.Repositories;
+using MailApp.Core.Services;
+using MailApp.Core.UnitOfWorks;
+using MailApp.Repository;
+using MailApp.Repository.Repositories;
+using MailApp.Repository.UnitOfWorks;
+using MailApp.Service.Services;
 using Microsoft.EntityFrameworkCore;
-using NLayerApp.Repository;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +16,14 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
+
+builder.Services.AddScoped<IEmailAddressRepository, EmailAddressRepository>();
+builder.Services.AddScoped<IEmailAddressService, EmailAddressService>();
+
 
 builder.Services.AddDbContext<AppDbContext>(x =>
 {

@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace MailApp.Core.Model
 {
-    public class EmailAddress
+    public class EmailAddress : BaseEntity
     {
         public string? Email { get; set; }
 
-        public int EmailLogId { get; set; }
-        public EmailLog EmailLog { get; set; }
+        public List<EmailLog> EmailAddresses { get; set; } = new List<EmailLog>();
     }
 }

@@ -6,6 +6,7 @@ using MailApp.Repository.Repositories;
 using MailApp.Repository.UnitOfWorks;
 using MailApp.Service.Services;
 using Microsoft.EntityFrameworkCore;
+using NLayerApp.Service.Mapping;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +21,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
+
+builder.Services.AddAutoMapper(typeof(MapProfile));
 
 builder.Services.AddScoped<IEmailAddressRepository, EmailAddressRepository>();
 builder.Services.AddScoped<IEmailAddressService, EmailAddressService>();

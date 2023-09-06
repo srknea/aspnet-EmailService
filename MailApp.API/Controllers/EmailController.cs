@@ -1,4 +1,6 @@
-﻿using MailApp.Core.Model;
+﻿using AutoMapper;
+using MailApp.Core.DTOs;
+using MailApp.Core.Model;
 using MailApp.Core.Services;
 using MailApp.Service.Services;
 using Microsoft.AspNetCore.Http;
@@ -11,17 +13,21 @@ namespace MailApp.API.Controllers
     public class EmailController : ControllerBase
     {
         private readonly IEmailAddressService _emailAddressService;
-        public EmailController(IEmailAddressService emailAddressService)
+        private readonly IMapper _mapper;
+
+        public EmailController(IEmailAddressService emailAddressService, IMapper mapper)
         {
             _emailAddressService = emailAddressService;
+            _mapper = mapper;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Save(EmailAddress emailAddress)
+        public async Task<IActionResult> Save(EmailAddressDto emailAddressDto)
         {
-            await _emailAddressService.AddAsync(emailAddress);
+            var emailAddress = await _emailAddressService.AddAsync(_mapper.Map<EmailAddress>(emailAddressDto));
+            var dto = _mapper.Map<EmailAddressDto>(emailAddress);
 
-            return Ok();
+            return Ok(dto);
             // 201 : Oluşturuldu anlamında kullanılır. İşlem başarılı ise 201 döndürülebilir.
         }
 

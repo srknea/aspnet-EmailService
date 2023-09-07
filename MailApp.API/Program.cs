@@ -1,3 +1,6 @@
+using EmailService.API.Service;
+using MailApp.API.Helpter;
+using MailApp.API.Service;
 using MailApp.Core.Repositories;
 using MailApp.Core.Services;
 using MailApp.Core.UnitOfWorks;
@@ -29,6 +32,9 @@ builder.Services.AddScoped<IEmailAddressService, EmailAddressService>();
 
 builder.Services.AddScoped<IEmailLogRepository, EmailLogRepository>();
 builder.Services.AddScoped<IEmailLogService, EmailLogService>();
+
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+builder.Services.AddTransient<ISendEmailService, SendEmailService>();
 
 builder.Services.AddDbContext<AppDbContext>(x =>
 {

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MailApp.Core.DTOs;
 using MailApp.Core.Model;
+using NLayerApp.Core.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace NLayerApp.Service.Mapping
         {
             CreateMap<EmailAddress, EmailAddressDto>().ReverseMap();
             CreateMap<EmailLog, EmailLogDto>().ReverseMap();
+            CreateMap<EmailAddress, EmailAddressWithEmailLogDto>();
 
         }
     }

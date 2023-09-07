@@ -1,4 +1,5 @@
 ﻿using MailApp.Core.Model;
+using NLayerApp.Core.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace MailApp.Core.Services
 {
     public interface IEmailAddressService : IService<EmailAddress>
     {
+        public Task<EmailAddressWithEmailLogDto> GetSingleCategoryByWithProductAsync(int emailAddressId);
     }
 }

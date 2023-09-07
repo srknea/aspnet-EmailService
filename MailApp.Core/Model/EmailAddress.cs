@@ -10,6 +10,6 @@ namespace MailApp.Core.Model
     {
         public string? Email { get; set; }
 
-        public List<EmailLog> EmailAddresses { get; set; } = new List<EmailLog>();
+        public List<EmailLog> EmailLogs { get; set; } = new List<EmailLog>();
     }
 }

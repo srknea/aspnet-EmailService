@@ -5,6 +5,7 @@ using MailApp.Core.Services;
 using MailApp.Service.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NLayerApp.Core.DTOs;
 using System.Collections.Generic;
 
 namespace MailApp.API.Controllers
@@ -30,6 +31,15 @@ namespace MailApp.API.Controllers
             var emailAddressDto = _mapper.Map<List<EmailAddressDto>>(emailAddress.ToList());
 
             return Ok(emailAddressDto);
+        }
+
+        // GET: api/categories/GetSingleCategoryByWithProducts/5
+        [HttpGet("[action]/{categoryId}")]
+        public async Task<IActionResult> GetSingleCategoryByWithProduct(int categoryId)
+        {
+            var emailAddressWithEmailLogDto = await _emailAddressService.GetSingleCategoryByWithProductAsync(categoryId);
+
+            return Ok(emailAddressWithEmailLogDto);
         }
 
         // GET : api/email/5

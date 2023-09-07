@@ -14,5 +14,11 @@ namespace MailApp.Repository.Repositories
         public EmailAddressRepository(AppDbContext context) : base(context)
         {
         }
+
+
+        public async Task<EmailAddress> GetSingleEmailAddressByWithEmailLogAsync(int emailAddressId)
+        {
+            return await _context.EmailAddresses.Include(x => x.EmailLogs).Where(x => x.Id == emailAddressId).SingleOrDefaultAsync(x => x.Id == emailAddressId);
+        }
     }
 }

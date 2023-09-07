@@ -1,7 +1,9 @@
-﻿using MailApp.Core.Model;
+﻿using AutoMapper;
+using MailApp.Core.Model;
 using MailApp.Core.Repositories;
 using MailApp.Core.Services;
 using MailApp.Core.UnitOfWorks;
+using NLayerApp.Core.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +14,21 @@ namespace MailApp.Service.Services
 {
     public class EmailAddressService : Service<EmailAddress>, IEmailAddressService
     {
-        public EmailAddressService(IGenericRepository<EmailAddress> repository, IUnitOfWork unitOfWork) : base(repository, unitOfWork)
+        private readonly IEmailAddressRepository _emailAddressRepository;
+        private readonly IMapper _mapper;
+        public EmailAddressService(IGenericRepository<EmailAddress> repository, IUnitOfWork unitOfWork, IMapper mapper, IEmailAddressRepository emailAddressRepository) : base(repository, unitOfWork)
         {
+            _mapper = mapper;
+            _emailAddressRepository = emailAddressRepository;
+        }
+
+        public async Task<EmailAddressWithEmailLogDto> GetSingleCategoryByWithProductAsync(int emailAddressId)
+        {
+            var emailAddress = await _emailAddressRepository.GetSingleEmailAddressByWithEmailLogAsync(emailAddressId);
+
+            EmailAddressWithEmailLogDto dto = _mapper.Map<EmailAddressWithEmailLogDto>(emailAddress);
+
+            return dto;
         }
     }
 }

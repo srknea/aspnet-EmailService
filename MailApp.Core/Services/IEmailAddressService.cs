@@ -10,6 +10,6 @@ namespace MailApp.Core.Services
 {
     public interface IEmailAddressService : IService<EmailAddress>
     {
-        public Task<EmailAddressWithEmailLogDto> GetSingleCategoryByWithProductAsync(int emailAddressId);
+        public Task<EmailAddressWithEmailLogDto> GetSingleEmailAddressByWithEmailLogAsync(int emailAddressId);
     }
 }

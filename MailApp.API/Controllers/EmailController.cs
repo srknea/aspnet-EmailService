@@ -2,9 +2,11 @@
 using MailApp.Core.DTOs;
 using MailApp.Core.Model;
 using MailApp.Core.Services;
+using MailApp.Repository;
 using MailApp.Service.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NLayerApp.Core.DTOs;
 using System.Collections.Generic;
 
@@ -14,16 +16,18 @@ namespace MailApp.API.Controllers
     [ApiController]
     public class EmailController : ControllerBase
     {
+        
         private readonly IEmailAddressService _emailAddressService;
         private readonly IMapper _mapper;
+        private readonly AppDbContext _context;
 
-        public EmailController(IEmailAddressService emailAddressService, IMapper mapper)
+        public EmailController(IEmailAddressService emailAddressService, IMapper mapper, AppDbContext appDbContext, AppDbContext context)
         {
             _emailAddressService = emailAddressService;
             _mapper = mapper;
+            _context = context;
         }
 
-        // GET : api/email
         [HttpGet]
         public async Task<IActionResult> All()
         {
@@ -33,16 +37,14 @@ namespace MailApp.API.Controllers
             return Ok(emailAddressDto);
         }
 
-        // GET: api/categories/GetSingleCategoryByWithProducts/5
-        [HttpGet("[action]/{categoryId}")]
-        public async Task<IActionResult> GetSingleCategoryByWithProduct(int categoryId)
+        [HttpGet("[action]/{emailAddressId}")]
+        public async Task<IActionResult> GetSingleEmailAddressByWithEmailLog(int emailAddressId)
         {
-            var emailAddressWithEmailLogDto = await _emailAddressService.GetSingleCategoryByWithProductAsync(categoryId);
+            var emailAddressWithEmailLogDto = await _emailAddressService.GetSingleEmailAddressByWithEmailLogAsync(emailAddressId);
 
             return Ok(emailAddressWithEmailLogDto);
         }
 
-        // GET : api/email/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -57,6 +59,14 @@ namespace MailApp.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Save(EmailAddressDto emailAddressDto)
         {
+            // Aynı ürün adıyla başka bir kayıt var mı?
+            var isExsist =  await _context.EmailAddresses.AnyAsync(e => e.Email == emailAddressDto.Email);
+            
+            if (isExsist)
+            {
+                return BadRequest("Bu e-posta adresi zaten mevcut.");
+            }
+
             var emailAddress = await _emailAddressService.AddAsync(_mapper.Map<EmailAddress>(emailAddressDto));
             var dto = _mapper.Map<EmailAddressDto>(emailAddress);
 
@@ -71,7 +81,6 @@ namespace MailApp.API.Controllers
             return Ok();
         }
 
-        // DELETE : api/email/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Remove(int id)
         {

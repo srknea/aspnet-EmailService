@@ -13,7 +13,6 @@ namespace MailApp.Repository
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-            //var p = new Product() { ProductFeature = new ProductFeature() { } };  
         }
 
         public DbSet<EmailAddress> EmailAddresses { get; set; }
@@ -22,6 +21,10 @@ namespace MailApp.Repository
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            modelBuilder.Entity<EmailAddress>()
+               .HasIndex(x => x.Email) // Ürün adına göre bir index oluşturuyoruz
+               .IsUnique(); // Bu indexi benzersiz yaparak aynı üründen iki tane eklenmesini engelliyoruz
 
             base.OnModelCreating(modelBuilder);
         }

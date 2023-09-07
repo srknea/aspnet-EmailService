@@ -1,4 +1,5 @@
 using EmailService.API.Service;
+using FluentValidation.AspNetCore;
 using MailApp.API.Helpter;
 using MailApp.API.Service;
 using MailApp.Core.Repositories;
@@ -8,6 +9,7 @@ using MailApp.Repository;
 using MailApp.Repository.Repositories;
 using MailApp.Repository.UnitOfWorks;
 using MailApp.Service.Services;
+using MailApp.Service.Validations;
 using Microsoft.EntityFrameworkCore;
 using NLayerApp.Service.Mapping;
 using System.Reflection;
@@ -16,7 +18,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<EmailAddressDtoValidator>());
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

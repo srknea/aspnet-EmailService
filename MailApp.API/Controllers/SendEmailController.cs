@@ -79,17 +79,6 @@ namespace MailApp.API.Controllers
             }
         }
 
-        /*
-        [HttpPost]
-        public async Task<IActionResult> Save(EmailLogDto emailLogDto)
-        {
-            var emailLog = await _emailLogService.AddAsync(_mapper.Map<EmailLog>(emailLogDto));
-            var dto = _mapper.Map<EmailLogDto>(emailLog);
-
-            return Ok(dto);
-        }
-        */
-
         [HttpDelete("{id}")]
         public async Task<IActionResult> Remove(int id)
         {

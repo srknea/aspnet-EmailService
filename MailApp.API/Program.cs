@@ -27,6 +27,8 @@ builder.Services.AddAutoMapper(typeof(MapProfile));
 builder.Services.AddScoped<IEmailAddressRepository, EmailAddressRepository>();
 builder.Services.AddScoped<IEmailAddressService, EmailAddressService>();
 
+builder.Services.AddScoped<IEmailLogRepository, EmailLogRepository>();
+builder.Services.AddScoped<IEmailLogService, EmailLogService>();
 
 builder.Services.AddDbContext<AppDbContext>(x =>
 {

@@ -14,7 +14,8 @@ namespace NLayerApp.Service.Mapping
         public MapProfile()
         {
             CreateMap<EmailAddress, EmailAddressDto>().ReverseMap();
-         
+            CreateMap<EmailLog, EmailLogDto>().ReverseMap();
+
         }
     }
 }

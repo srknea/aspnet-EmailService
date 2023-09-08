@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NLayerApp.Core.DTOs
+namespace MailApp.Core.DTOs
 {
     public class EmailAddressWithEmailLogDto : EmailAddressDto
     {

@@ -14,5 +14,11 @@ namespace MailApp.Repository.Repositories
         public EmailLogRepository(AppDbContext context) : base(context)
         {
         }
+
+        public async Task<List<EmailLog>> GetEmailLogsWithEmailAddress()
+        {
+            // Eager Loading
+            return await _context.EmailLogs.Include(x => x.EmailAddress).ToListAsync();
+        }
     }
 }

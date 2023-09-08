@@ -8,10 +8,10 @@ using MailApp.Core.UnitOfWorks;
 using MailApp.Repository;
 using MailApp.Repository.Repositories;
 using MailApp.Repository.UnitOfWorks;
+using MailApp.Service.Mapping;
 using MailApp.Service.Services;
 using MailApp.Service.Validations;
 using Microsoft.EntityFrameworkCore;
-using NLayerApp.Service.Mapping;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);

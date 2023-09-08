@@ -6,10 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MailApp.Core.Services
+namespace MailApp.Core.DTOs
 {
-    public interface IEmailLogService : IService<EmailLog>
+    public class EmailLogWithEmailAddressDto : EmailLogDto
     {
-        Task<List<EmailLogWithEmailAddressDto>> GetEmailLogsWithEmailAddress();
+        public EmailAddressDto EmailAddress { get; set; }
     }
 }

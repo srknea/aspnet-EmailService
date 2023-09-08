@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
+using MailApp.Core.DTOs;
 using MailApp.Core.Model;
 using MailApp.Core.Repositories;
 using MailApp.Core.Services;
 using MailApp.Core.UnitOfWorks;
-using NLayerApp.Core.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;

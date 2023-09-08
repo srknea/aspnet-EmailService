@@ -1,5 +1,5 @@
-﻿using MailApp.Core.Model;
-using NLayerApp.Core.DTOs;
+﻿using MailApp.Core.DTOs;
+using MailApp.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;

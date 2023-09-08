@@ -1,4 +1,5 @@
-﻿using MailApp.Core.Model;
+﻿using MailApp.Core.DTOs;
+using MailApp.Core.Model;
 using MailApp.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -14,7 +15,6 @@ namespace MailApp.Repository.Repositories
         public EmailAddressRepository(AppDbContext context) : base(context)
         {
         }
-
 
         public async Task<EmailAddress> GetSingleEmailAddressByIdWithEmailLogsAsync(int emailAddressId)
         {

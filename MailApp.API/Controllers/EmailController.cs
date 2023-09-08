@@ -7,7 +7,6 @@ using MailApp.Service.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NLayerApp.Core.DTOs;
 using System.Collections.Generic;
 
 namespace MailApp.API.Controllers

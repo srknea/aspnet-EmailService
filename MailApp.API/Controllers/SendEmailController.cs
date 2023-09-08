@@ -48,6 +48,14 @@ namespace MailApp.API.Controllers
             return Ok(emailLogDto);
         }
 
+       
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetEmailLogsWithEmailAddress()
+        {
+            var emailLogWithEmailAddressDto = await _emailLogService.GetEmailLogsWithEmailAddress();
+            return Ok(emailLogWithEmailAddressDto);
+        }
+
         [HttpPost("[action]")]
         public async Task<IActionResult> Send(EmailLogDto emailLogDto)
         {

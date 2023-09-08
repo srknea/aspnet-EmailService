@@ -37,10 +37,10 @@ namespace MailApp.API.Controllers
             return Ok(emailAddressDto);
         }
 
-        [HttpGet("[action]/{emailAddressId}")]
-        public async Task<IActionResult> GetSingleEmailAddressByWithEmailLog(int emailAddressId)
+        [HttpGet("EmailAddressWithEmailLogs/{emailAddressId}")]
+        public async Task<IActionResult> GetSingleEmailAddressByIdWithEmailLogs(int emailAddressId)
         {
-            var emailAddressWithEmailLogDto = await _emailAddressService.GetSingleEmailAddressByWithEmailLogAsync(emailAddressId);
+            var emailAddressWithEmailLogDto = await _emailAddressService.GetSingleEmailAddressByIdWithEmailLogsAsync(emailAddressId);
 
             return Ok(emailAddressWithEmailLogDto);
         }

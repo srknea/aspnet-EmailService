@@ -16,7 +16,7 @@ namespace MailApp.Repository.Repositories
         }
 
 
-        public async Task<EmailAddress> GetSingleEmailAddressByWithEmailLogAsync(int emailAddressId)
+        public async Task<EmailAddress> GetSingleEmailAddressByIdWithEmailLogsAsync(int emailAddressId)
         {
             return await _context.EmailAddresses.Include(x => x.EmailLogs).Where(x => x.Id == emailAddressId).SingleOrDefaultAsync(x => x.Id == emailAddressId);
         }

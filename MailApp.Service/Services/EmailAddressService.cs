@@ -22,9 +22,9 @@ namespace MailApp.Service.Services
             _emailAddressRepository = emailAddressRepository;
         }
 
-        public async Task<EmailAddressWithEmailLogDto> GetSingleEmailAddressByWithEmailLogAsync(int emailAddressId)
+        public async Task<EmailAddressWithEmailLogDto> GetSingleEmailAddressByIdWithEmailLogsAsync(int emailAddressId)
         {
-            var emailAddress = await _emailAddressRepository.GetSingleEmailAddressByWithEmailLogAsync(emailAddressId);
+            var emailAddress = await _emailAddressRepository.GetSingleEmailAddressByIdWithEmailLogsAsync(emailAddressId);
 
             EmailAddressWithEmailLogDto dto = _mapper.Map<EmailAddressWithEmailLogDto>(emailAddress);
 

@@ -9,6 +9,6 @@ namespace MailApp.Core.Repositories
 {
     public interface IEmailAddressRepository : IGenericRepository<EmailAddress>
     {
-        Task<EmailAddress> GetSingleEmailAddressByWithEmailLogAsync(int id);
+        Task<EmailAddress> GetSingleEmailAddressByIdWithEmailLogsAsync(int id);
     }
 }

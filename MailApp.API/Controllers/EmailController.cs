@@ -28,7 +28,7 @@ namespace MailApp.API.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet("GetAll")]
         public async Task<IActionResult> All()
         {
             var emailAddress = await _emailAddressService.GetAllAsync();
@@ -37,7 +37,7 @@ namespace MailApp.API.Controllers
             return Ok(emailAddressDto);
         }
 
-        [HttpGet("EmailAddressWithEmailLogs/{emailAddressId}")]
+        [HttpGet("GetAll/EmailAddressWithEmailLogs/{emailAddressId}")]
         public async Task<IActionResult> GetSingleEmailAddressByIdWithEmailLogs(int emailAddressId)
         {
             var emailAddressWithEmailLogDto = await _emailAddressService.GetSingleEmailAddressByIdWithEmailLogsAsync(emailAddressId);
@@ -45,7 +45,7 @@ namespace MailApp.API.Controllers
             return Ok(emailAddressWithEmailLogDto);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("[action]/{id}")]
         public async Task<IActionResult> GetById(int id)
         {
 
@@ -56,7 +56,7 @@ namespace MailApp.API.Controllers
             return Ok(emailAddressDto);
         }
 
-        [HttpPost]
+        [HttpPost("Create")]
         public async Task<IActionResult> Save(EmailAddressDto emailAddressDto)
         {
             // Aynı ürün adıyla başka bir kayıt var mı?
@@ -73,7 +73,7 @@ namespace MailApp.API.Controllers
             return Ok(dto);
         }
 
-        [HttpPut]
+        [HttpPut("Update")]
         public async Task<IActionResult> Update(EmailAddressUpdateDto emailAddressUpdateDto)
         {
             await _emailAddressService.UpdateAsync(_mapper.Map<EmailAddress>(emailAddressUpdateDto));
@@ -81,7 +81,7 @@ namespace MailApp.API.Controllers
             return Ok();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> Remove(int id)
         {
             var emailAddress = await _emailAddressService.GetByIdAsync(id);

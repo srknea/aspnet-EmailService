@@ -28,7 +28,7 @@ namespace MailApp.API.Controllers
             _emailAddressService = emailAddressService;
         }
 
-        [HttpGet]
+        [HttpGet("GetAll")]
         public async Task<IActionResult> All()
         {
             var emailLogs = await _emailLogService.GetAllAsync();
@@ -37,23 +37,22 @@ namespace MailApp.API.Controllers
             return Ok(emailLogsDto);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetById/{id}")]
         public async Task<IActionResult> GetById(int id)
         {
 
             var emailLog = await _emailLogService.GetByIdAsync(id);
 
-            var emailLogDto = _mapper.Map<EmailAddressDto>(emailLog);
+            var emailLogDto = _mapper.Map<EmailLogDto>(emailLog);
 
             return Ok(emailLogDto);
         }
 
-        [HttpPost("Send")]
+        [HttpPost("[action]")]
         public async Task<IActionResult> Send(EmailLogDto emailLogDto)
         {
 
             var emailAddress = await _emailAddressService.GetByIdAsync(emailLogDto.EmailAddressId);
-
 
             try
             {
@@ -84,7 +83,7 @@ namespace MailApp.API.Controllers
             return Ok(dto);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> Remove(int id)
         {
             var emailLog = await _emailLogService.GetByIdAsync(id);

@@ -31,54 +31,55 @@ namespace MailApp.Repository
 
         public override int SaveChanges()
         {
-            ChangeTracker.Entries().ToList().ForEach(x =>
+            foreach (var item in ChangeTracker.Entries())
             {
-                if (x.Entity is EmailAddress e)
+                if (item.Entity is BaseEntity entityReference)
                 {
-                    if (x.State == EntityState.Added)
+                    switch (item.Entity)
                     {
-                        e.CreatedDate = DateTime.Now;
-                    }
-                    if (x.State == EntityState.Modified)
-                    {
-                        e.UpdatedDate = DateTime.Now;
+                        case EntityState.Added:
+                            {
+                                entityReference.CreatedDate = DateTime.Now;
+                                break;
+                            }
+                        case EntityState.Modified:
+                            {
+                                entityReference.UpdatedDate = DateTime.Now;
+                                break;
+                            }
                     }
                 }
-            });
+            }
 
             return base.SaveChanges();
         }
-
-        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            ChangeTracker.Entries().ToList().ForEach(x =>
+
+            foreach (var item in ChangeTracker.Entries())
             {
-                if (x.Entity is EmailAddress a)
+                if (item.Entity is BaseEntity entityReference)
                 {
-                    if (x.State == EntityState.Added)
+                    switch (item.State)
                     {
-                        a.CreatedDate = DateTime.Now;
-                    }
-                    if (x.State == EntityState.Modified)
-                    {
-                        a.UpdatedDate = DateTime.Now;
+                        case EntityState.Added:
+                            {
+                                entityReference.CreatedDate = DateTime.Now;
+                                break;
+                            }
+                        case EntityState.Modified:
+                            {
+                                Entry(entityReference).Property(x => x.CreatedDate).IsModified = false;
+
+                                entityReference.UpdatedDate = DateTime.Now;
+                                break;
+                            }
                     }
                 }
-
-                if (x.Entity is EmailLog l)
-                {
-                    if (x.State == EntityState.Added)
-                    {
-                        l.CreatedDate = DateTime.Now;
-                    }
-                    if (x.State == EntityState.Modified)
-                    {
-                        l.UpdatedDate = DateTime.Now;
-                    }
-                }
-            });
-
-            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+            }
+            return base.SaveChangesAsync(cancellationToken);
         }
+
+
     }
 }

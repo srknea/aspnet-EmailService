@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MailApp.Core.DTOs
 {
-    public abstract class BaseDto
+    public class EmailAddressUpdateDto
     {
         public int Id { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public string? Email { get; set; }
     }
 }

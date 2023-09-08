@@ -74,9 +74,9 @@ namespace MailApp.API.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update(EmailAddressDto emailAddressDto)
+        public async Task<IActionResult> Update(EmailAddressUpdateDto emailAddressUpdateDto)
         {
-            await _emailAddressService.UpdateAsync(_mapper.Map<EmailAddress>(emailAddressDto));
+            await _emailAddressService.UpdateAsync(_mapper.Map<EmailAddress>(emailAddressUpdateDto));
 
             return Ok();
         }

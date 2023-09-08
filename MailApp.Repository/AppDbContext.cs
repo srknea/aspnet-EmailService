@@ -49,6 +49,13 @@ namespace MailApp.Repository
                             }
                     }
                 }
+
+                if (item.Entity is EmailLog e)
+                {
+                    if (item.State == EntityState.Added) { 
+                        e.CreatedDate = DateTime.Now;
+                    }
+                }
             }
 
             return base.SaveChanges();
@@ -74,6 +81,14 @@ namespace MailApp.Repository
                                 entityReference.UpdatedDate = DateTime.Now;
                                 break;
                             }
+                    }
+                }
+
+                if (item.Entity is EmailLog e)
+                {
+                    if (item.State == EntityState.Added)
+                    {
+                        e.CreatedDate = DateTime.Now;
                     }
                 }
             }

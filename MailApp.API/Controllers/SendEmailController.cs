@@ -20,9 +20,6 @@ namespace MailApp.API.Controllers
         private readonly ISendEmailService _sendEmailService;
         private readonly IEmailAddressService _emailAddressService;
 
-
-
-
         public SendEmailController(IEmailLogService emailLogService, IMapper mapper, ISendEmailService sendEmailService, IEmailAddressService emailAddressService)
         {
             _emailLogService = emailLogService;
@@ -50,8 +47,6 @@ namespace MailApp.API.Controllers
 
             return Ok(emailLogDto);
         }
-
-
 
         [HttpPost("Send")]
         public async Task<IActionResult> Send(EmailLogDto emailLogDto)

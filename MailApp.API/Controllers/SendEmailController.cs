@@ -28,35 +28,7 @@ namespace MailApp.API.Controllers
             _emailAddressService = emailAddressService;
         }
 
-        [HttpGet("GetAll")]
-        public async Task<IActionResult> All()
-        {
-            var emailLogs = await _emailLogService.GetAllAsync();
-            var emailLogsDto = _mapper.Map<List<EmailLogDto>>(emailLogs.ToList());
-
-            return Ok(emailLogsDto);
-        }
-
-        [HttpGet("GetById/{id}")]
-        public async Task<IActionResult> GetById(int id)
-        {
-
-            var emailLog = await _emailLogService.GetByIdAsync(id);
-
-            var emailLogDto = _mapper.Map<EmailLogDto>(emailLog);
-
-            return Ok(emailLogDto);
-        }
-
-       
-        [HttpGet("[action]")]
-        public async Task<IActionResult> GetEmailLogsWithEmailAddress()
-        {
-            var emailLogWithEmailAddressDto = await _emailLogService.GetEmailLogsWithEmailAddress();
-            return Ok(emailLogWithEmailAddressDto);
-        }
-
-        [HttpPost("[action]")]
+        [HttpPost]
         public async Task<IActionResult> Send(EmailLogDto emailLogDto)
         {
 
@@ -82,24 +54,13 @@ namespace MailApp.API.Controllers
         }
 
         [HttpPost("Test")]
-        public async Task<IActionResult> Test(EmailLogDto emailLogDto)
+        public async Task<IActionResult> Test(SendEmailDto sendEmailDto)
         {
 
-            var emailLog = await _emailLogService.AddAsync(_mapper.Map<EmailLog>(emailLogDto));
+            var emailLog = await _emailLogService.AddAsync(_mapper.Map<EmailLog>(sendEmailDto));
             var dto = _mapper.Map<EmailLogDto>(emailLog);
 
             return Ok(dto);
         }
-
-        [HttpDelete("Delete/{id}")]
-        public async Task<IActionResult> Remove(int id)
-        {
-            var emailLog = await _emailLogService.GetByIdAsync(id);
-
-            await _emailLogService.RemoveAsync(emailLog);
-
-            return Ok();
-        }
-
     }
 }

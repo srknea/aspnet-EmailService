@@ -13,14 +13,14 @@ namespace MailApp.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmailController : ControllerBase
+    public class EmailAddressesController : ControllerBase
     {
         
         private readonly IEmailAddressService _emailAddressService;
         private readonly IMapper _mapper;
         private readonly AppDbContext _context;
 
-        public EmailController(IEmailAddressService emailAddressService, IMapper mapper, AppDbContext appDbContext, AppDbContext context)
+        public EmailAddressesController(IEmailAddressService emailAddressService, IMapper mapper, AppDbContext appDbContext, AppDbContext context)
         {
             _emailAddressService = emailAddressService;
             _mapper = mapper;
@@ -55,18 +55,19 @@ namespace MailApp.API.Controllers
             return Ok(emailAddressDto);
         }
 
+        
         [HttpPost("Create")]
-        public async Task<IActionResult> Save(EmailAddressDto emailAddressDto)
+        public async Task<IActionResult> Save(EmailAddressCreateDto emailAddressCreateDto)
         {
             // Aynı ürün adıyla başka bir kayıt var mı?
-            var isExsist =  await _context.EmailAddresses.AnyAsync(e => e.Email == emailAddressDto.Email);
+            var isExsist =  await _context.EmailAddresses.AnyAsync(e => e.Email == emailAddressCreateDto.Email);
             
             if (isExsist)
             {
                 return BadRequest("Bu e-posta adresi zaten mevcut.");
             }
 
-            var emailAddress = await _emailAddressService.AddAsync(_mapper.Map<EmailAddress>(emailAddressDto));
+            var emailAddress = await _emailAddressService.AddAsync(_mapper.Map<EmailAddress>(emailAddressCreateDto));
             var dto = _mapper.Map<EmailAddressDto>(emailAddress);
 
             return Ok(dto);

@@ -18,6 +18,8 @@ namespace MailApp.Service.Mapping
             CreateMap<EmailLog, EmailLogDto>().ReverseMap();
             CreateMap<EmailAddress, EmailAddressWithEmailLogDto>();
             CreateMap<EmailLog, EmailLogWithEmailAddressDto>();
+            CreateMap<EmailLog, SendEmailDto>().ReverseMap();
+            CreateMap<EmailAddress, EmailAddressCreateDto>().ReverseMap();
         }
     }
 }

@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 
 namespace MailApp.Service.Validations
 {
-    public class EmailAddressDtoValidator : AbstractValidator<EmailAddressDto>
+    public class EmailAddressCreateDtoValidator : AbstractValidator<EmailAddressCreateDto>
     {
-        public EmailAddressDtoValidator()
+        public EmailAddressCreateDtoValidator()
         {
             RuleFor(x => x.Email)
                 .NotNull().WithMessage("{PropertyName} is required")

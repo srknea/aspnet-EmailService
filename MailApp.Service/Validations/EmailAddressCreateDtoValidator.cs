@@ -17,7 +17,7 @@ namespace MailApp.Service.Validations
         public EmailAddressCreateDtoValidator()
         {
             RuleFor(x => x.Email)
-                .NotNull().WithMessage("{PropertyName} is required")
+                .NotNull().NotEmpty().WithMessage("{PropertyName} is required")
                 .EmailAddress().WithMessage("A valid email address is required.");
         }
     }

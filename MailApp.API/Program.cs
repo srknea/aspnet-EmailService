@@ -19,7 +19,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers()
-    .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<EmailAddressCreateDtoValidator>());
+    .AddFluentValidation(x =>
+    {
+        x.RegisterValidatorsFromAssemblyContaining<EmailAddressCreateDtoValidator>();
+        x.RegisterValidatorsFromAssemblyContaining<SendEmailDtoValidator>();
+    });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

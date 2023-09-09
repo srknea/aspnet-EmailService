@@ -18,7 +18,7 @@ namespace MailApp.Service.Validations
         {
             RuleFor(x => x.Subject)
                 .NotNull().NotEmpty().WithMessage("{PropertyName} alanı boş olamaz")
-                .MaximumLength(255).WithMessage("{PropertyName} alanı 255 karakterden uzun olamaz.")
+                .MaximumLength(255).WithMessage("{PropertyName} alanı 255 karakterden uzun olamaz.");
 
             RuleFor(x => x.Body)
                 .NotNull().NotEmpty().WithMessage("{PropertyName} is required")

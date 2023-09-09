@@ -18,6 +18,7 @@ namespace MailApp.Service.Validations
         {
             RuleFor(x => x.Email)
                 .NotNull().NotEmpty().WithMessage("{PropertyName} is required")
+                .MaximumLength(64).WithMessage("{PropertyName} alanı 64 karakterden uzun olamaz.")
                 .EmailAddress().WithMessage("A valid email address is required.");
         }
     }

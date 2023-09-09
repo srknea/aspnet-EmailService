@@ -26,6 +26,12 @@ namespace MailApp.Repository
                .HasIndex(x => x.Email) // Ürün adına göre bir index oluşturuyoruz
                .IsUnique(); // Bu indexi benzersiz yaparak aynı üründen iki tane eklenmesini engelliyoruz
 
+            modelBuilder.Entity<EmailAddress>().Property(x => x.Email)
+                .HasMaxLength(64);
+
+            modelBuilder.Entity<EmailLog>().Property(x => x.Subject)
+                .HasMaxLength(255);
+            
             base.OnModelCreating(modelBuilder);
         }
 

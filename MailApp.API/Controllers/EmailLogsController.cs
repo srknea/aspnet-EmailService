@@ -33,7 +33,7 @@ namespace MailApp.API.Controllers
             return Ok(emailLogsDto);
         }
 
-        [HttpGet("GetById/EmailLog/{id}")]
+        [HttpGet("GetById/{id}")]
         public async Task<IActionResult> GetById(int id)
         {
 

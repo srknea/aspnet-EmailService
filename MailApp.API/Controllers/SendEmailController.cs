@@ -29,20 +29,20 @@ namespace MailApp.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Send(EmailLogDto emailLogDto)
+        public async Task<IActionResult> Send(SendEmailDto sendEmailDto)
         {
 
-            var emailAddress = await _emailAddressService.GetByIdAsync(emailLogDto.EmailAddressId);
+            var emailAddress = await _emailAddressService.GetByIdAsync(sendEmailDto.EmailAddressId);
 
             try
             {
                 MailRequest mailrequest = new MailRequest();
                 mailrequest.ToEmail = emailAddress.Email;
-                mailrequest.Subject = emailLogDto.Subject;
-                mailrequest.Body = emailLogDto.Body;
+                mailrequest.Subject = sendEmailDto.Subject;
+                mailrequest.Body = sendEmailDto.Body;
                 await _sendEmailService.SendEmailAsync(mailrequest);
 
-                var emailLog = await _emailLogService.AddAsync(_mapper.Map<EmailLog>(emailLogDto));
+                var emailLog = await _emailLogService.AddAsync(_mapper.Map<EmailLog>(sendEmailDto));
                 var dto = _mapper.Map<EmailLogDto>(emailLog);
 
                 return Ok(dto);
@@ -51,16 +51,6 @@ namespace MailApp.API.Controllers
             {
                 throw;
             }
-        }
-
-        [HttpPost("Test")]
-        public async Task<IActionResult> Test(SendEmailDto sendEmailDto)
-        {
-
-            var emailLog = await _emailLogService.AddAsync(_mapper.Map<EmailLog>(sendEmailDto));
-            var dto = _mapper.Map<EmailLogDto>(emailLog);
-
-            return Ok(dto);
         }
     }
 }

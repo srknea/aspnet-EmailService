@@ -18,7 +18,8 @@ namespace EmailService.API.Service
         public async Task SendEmailAsync(MailRequest mailrequest)
         {
             var email = new MimeMessage();
-            email.Sender = MailboxAddress.Parse(emailSettings.Email);
+            email.From.Add(new MailboxAddress(emailSettings.Displayname, emailSettings.Email));
+            //email.Sender = MailboxAddress.Parse(emailSettings.Email);
             email.To.Add(MailboxAddress.Parse(mailrequest.ToEmail));
             email.Subject=mailrequest.Subject;
             var builder = new BodyBuilder();
